@@ -1,7 +1,7 @@
 # build stage
-FROM golang:1.10-alpine AS build-env
+FROM golang:1-alpine3.11 AS build-env
 RUN apk --no-cache add build-base git bzr mercurial gcc
-ENV D=/go/src/github.com/fnproject/fn
+ENV D=/go/src/github.com/rijulsudhir/fn-1
 ADD . $D
 RUN cd $D/cmd/fnserver && go build -o fn-alpine && cp fn-alpine /tmp/
 
