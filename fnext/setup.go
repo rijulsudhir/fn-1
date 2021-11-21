@@ -29,6 +29,14 @@ type ExtServer interface {
 	AddRootMiddleware(m Middleware)
 	// AddRootMiddlewareFunc add middleware for end user applications
 	AddRootMiddlewareFunc(m MiddlewareFunc)
+	// AddAppMiddleware add middleware add middleware for apps
+	AddAppMiddleware(m Middleware)
+	// AddAppMiddlewareFunc add middleware for apps
+	AddAppMiddlewareFunc(m MiddlewareFunc)
+	// AddInvokeMiddleware add middleware add middleware for apps
+	AddInvokeMiddleware(m Middleware)
+	// AddInvokeMiddlewareFunc add middleware for apps
+	AddInvokeMiddlewareFunc(m MiddlewareFunc)
 
 	// AddEndpoint adds an endpoint to /v2/x
 	AddEndpoint(method, path string, handler APIHandler)

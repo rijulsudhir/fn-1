@@ -33,6 +33,20 @@ func (s *Server) rootMiddlewareWrapper() gin.HandlerFunc {
 	}
 }
 
+func (s *Server) appMiddlewareWrapper() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		// fmt.Println("APP MIDDLE")
+		s.runMiddleware(c, s.appMiddlewares)
+	}
+}
+
+func (s *Server) invokeMiddlewareWrapper() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		// fmt.Println("INVOKE MIDDLE")
+		s.runMiddleware(c, s.invokeMiddlewares)
+	}
+}
+
 // This is basically a single gin middleware that runs a bunch of fn middleware.
 // The final handler will pass it back to gin for further processing.
 func (s *Server) runMiddleware(c *gin.Context, ms []fnext.Middleware) {
@@ -119,4 +133,24 @@ func (s *Server) AddRootMiddleware(m fnext.Middleware) {
 // AddRootMiddlewareFunc add middleware for end user applications
 func (s *Server) AddRootMiddlewareFunc(m fnext.MiddlewareFunc) {
 	s.AddRootMiddleware(m)
+}
+
+// AddAppMiddleware add middleware add middleware for apps
+func (s *Server) AddAppMiddleware(m fnext.Middleware) {
+	s.appMiddlewares = append(s.appMiddlewares, m)
+}
+
+// AddAppMiddlewareFunc add middleware for apps
+func (s *Server) AddAppMiddlewareFunc(m fnext.MiddlewareFunc) {
+	s.AddAppMiddleware(m)
+}
+
+// AddInvokeMiddleware add middleware add middleware for apps
+func (s *Server) AddInvokeMiddleware(m fnext.Middleware) {
+	s.invokeMiddlewares = append(s.invokeMiddlewares, m)
+}
+
+// AddInvokeMiddlewareFunc add middleware for apps
+func (s *Server) AddInvokeMiddlewareFunc(m fnext.MiddlewareFunc) {
+	s.AddInvokeMiddleware(m)
 }

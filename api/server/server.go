@@ -213,9 +213,12 @@ type Server struct {
 	triggerListeners       *triggerListeners
 	rootMiddlewares        []fnext.Middleware
 	apiMiddlewares         []fnext.Middleware
-	promExporter           *prometheus.Exporter
-	triggerAnnotator       TriggerAnnotator
-	fnAnnotator            FnAnnotator
+	appMiddlewares         []fnext.Middleware
+	invokeMiddlewares      []fnext.Middleware
+
+	promExporter     *prometheus.Exporter
+	triggerAnnotator TriggerAnnotator
+	fnAnnotator      FnAnnotator
 
 	// Extensions can append to this list of contexts so that cancellations are properly handled.
 	extraCtxs []context.Context
@@ -1013,12 +1016,14 @@ func (s *Server) bindHandlers(ctx context.Context) {
 	case ServerTypeFull, ServerTypeLB:
 		if !s.noHTTTPTriggerEndpoint {
 			lbTriggerGroup := engine.Group("/t")
+			lbTriggerGroup.Use(s.appMiddlewareWrapper())
 			lbTriggerGroup.Any("/:app_name", s.handleHTTPTriggerCall)
 			lbTriggerGroup.Any("/:app_name/*trigger_source", s.handleHTTPTriggerCall)
 		}
 
 		if !s.noFnInvokeEndpoint {
 			lbFnInvokeGroup := engine.Group("/invoke")
+			lbFnInvokeGroup.Use(s.invokeMiddlewareWrapper())
 			lbFnInvokeGroup.POST("/:fn_id", s.handleFnInvokeCall)
 		}
 	}

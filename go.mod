@@ -1,6 +1,7 @@
-module github.com/fnproject/fn
+module github.com/rijulsudhir/fn-1
 
 replace cloud.google.com/go => github.com/google/go-cloud v0.4.1-0.20181025204856-f29236cc19de
+replace github.com/fnproject/fn => github.com/rijulsudhir/fn-1
 
 require (
 	contrib.go.opencensus.io/exporter/jaeger v0.1.0
