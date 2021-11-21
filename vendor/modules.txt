@@ -50,6 +50,33 @@ github.com/docker/go-connections/nat
 github.com/docker/go-units
 # github.com/fnproject/fdk-go v0.0.0-20181025170718-26ed643bea68
 github.com/fnproject/fdk-go
+# github.com/fnproject/fn v0.0.0-00010101000000-000000000000 => ../fn-1
+github.com/fnproject/fn/api
+github.com/fnproject/fn/api/agent
+github.com/fnproject/fn/api/agent/drivers
+github.com/fnproject/fn/api/agent/drivers/docker
+github.com/fnproject/fn/api/agent/drivers/stats
+github.com/fnproject/fn/api/agent/grpc
+github.com/fnproject/fn/api/agent/hybrid
+github.com/fnproject/fn/api/common
+github.com/fnproject/fn/api/datastore
+github.com/fnproject/fn/api/datastore/datastoretest
+github.com/fnproject/fn/api/datastore/internal/datastoreutil
+github.com/fnproject/fn/api/datastore/sql
+github.com/fnproject/fn/api/datastore/sql/dbhelper
+github.com/fnproject/fn/api/datastore/sql/migratex
+github.com/fnproject/fn/api/datastore/sql/migrations
+github.com/fnproject/fn/api/datastore/sql/mysql
+github.com/fnproject/fn/api/datastore/sql/postgres
+github.com/fnproject/fn/api/datastore/sql/sqlite
+github.com/fnproject/fn/api/id
+github.com/fnproject/fn/api/models
+github.com/fnproject/fn/api/runnerpool
+github.com/fnproject/fn/api/server
+github.com/fnproject/fn/api/server/defaultexts
+github.com/fnproject/fn/api/version
+github.com/fnproject/fn/fnext
+github.com/fnproject/fn/grpcutil
 # github.com/fsnotify/fsnotify v1.4.7
 github.com/fsnotify/fsnotify
 # github.com/fsouza/go-dockerclient v1.4.0
