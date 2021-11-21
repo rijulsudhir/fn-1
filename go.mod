@@ -37,4 +37,4 @@ require (
 
 go 1.13
 
-replace github.com/fnproject/fn => github.com/rijulsudhir/fn-1 v0.3.750-0.20211121155959-7ed88b0272ed
+
