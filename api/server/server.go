@@ -1015,7 +1015,8 @@ func (s *Server) bindHandlers(ctx context.Context) {
 	switch s.nodeType {
 	case ServerTypeFull, ServerTypeLB:
 		if !s.noHTTTPTriggerEndpoint {
-			lbTriggerGroup := engine.Group("/t")
+			CleanlbTriggerGroup := engine.Group("/t")
+			lbTriggerGroup := CleanlbTriggerGroup.Group("")
 			lbTriggerGroup.Use(s.appMiddlewareWrapper())
 			{
 				lbTriggerGroup.Any("/:app_name", s.handleHTTPTriggerCall)
@@ -1026,7 +1027,9 @@ func (s *Server) bindHandlers(ctx context.Context) {
 		if !s.noFnInvokeEndpoint {
 			lbFnInvokeGroup := engine.Group("/invoke")
 			lbFnInvokeGroup.Use(s.invokeMiddlewareWrapper())
-			lbFnInvokeGroup.POST("/:fn_id", s.handleFnInvokeCall)
+			{
+				lbFnInvokeGroup.POST("/:fn_id", s.handleFnInvokeCall)
+			}
 		}
 	}
 
