@@ -1017,8 +1017,10 @@ func (s *Server) bindHandlers(ctx context.Context) {
 		if !s.noHTTTPTriggerEndpoint {
 			lbTriggerGroup := engine.Group("/t")
 			lbTriggerGroup.Use(s.appMiddlewareWrapper())
-			lbTriggerGroup.Any("/:app_name", s.handleHTTPTriggerCall)
-			lbTriggerGroup.Any("/:app_name/*trigger_source", s.handleHTTPTriggerCall)
+			{
+				lbTriggerGroup.Any("/:app_name", s.handleHTTPTriggerCall)
+				lbTriggerGroup.Any("/:app_name/*trigger_source", s.handleHTTPTriggerCall)
+			}
 		}
 
 		if !s.noFnInvokeEndpoint {
